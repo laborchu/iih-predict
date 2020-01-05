@@ -1,4 +1,4 @@
-
+# coding=UTF-8
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -25,12 +25,12 @@ os.environ["CUDA_VISIBLE_DEVICES"]="0"
 #
 FLAGS = tf.app.flags.FLAGS
 
-tf.app.flags.DEFINE_string('eval_dir', './tmp/eval',
+tf.app.flags.DEFINE_string('eval_dir', '/root/code/iih-predict/tmp/eval',
                            """Directory where to write event logs.""")
 tf.app.flags.DEFINE_string('eval_data', 'test',
                            """Either 'test' or 'train_eval'.""")
 #模型存储路径
-tf.app.flags.DEFINE_string('checkpoint_dir', './tmp/train',
+tf.app.flags.DEFINE_string('checkpoint_dir', '/root/code/iih-predict/tmp/train',
                          """Directory where to read model checkpoints.""")
 # tf.app.flags.DEFINE_integer('eval_interval_secs', 60 * 5,
 #                             """How often to run the eval.""")
@@ -66,8 +66,7 @@ def predict_once(saver, logits):
     if(result):
       des="1"
     else:
-      des=" 0"
-    print(des)
+      des="0"
     return des
 def predict(path):
 
@@ -92,8 +91,10 @@ def main(argv=None):  # pylint: disable=unused-argument
   if len(argv)>1:
     imagePath = argv[1];
   else:
-    imagePath="./data_dir/pre/ee.jpeg"
+    imagePath="./data_dir/pre/3551.jpg"
   result = predict(imagePath)
+  print("result:"+result)  
+  return 1
   # result = 'reslut:' + result 
   # img = mpimg.imread(imagePath)
   # #str = title.decode('utf8')
